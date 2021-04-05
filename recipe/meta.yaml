@@ -32,16 +32,16 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - cmake >=3.16
+        - cmake             {{ cmake       }}
         - make
         - libuv
-        - git >={{ git }}
+        - git               {{ git }}
       host:
         - cudatoolkit {{ cudatoolkit }}        #[build_type == 'cuda']
         - openmpi {{ openmpi }}                #[mpi_type == 'openmpi']
       run:
         - cudatoolkit {{ cudatoolkit }}        #[build_type == 'cuda']
-        - _lightgbm_select {{ lightgbm_select_version }} 
+        - _lightgbm_select {{ lightgbm_select_version }}
 
   - name: py-lightgbm-base
     script: install-py-lightgbm.sh
@@ -57,7 +57,7 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - cmake >=3.16
+        - cmake             {{ cmake       }}
         - make
       host:
         - {{ pin_subpackage('liblightgbm-base', exact=True) }}
